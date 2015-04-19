@@ -23,4 +23,5 @@ $GLOBALS['API_COMMANDS'] = array(
   'reboot',
   'shutdown',
   'version',
+  'smartthings',
 );
