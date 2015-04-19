@@ -24,7 +24,7 @@ $page['perc'] = cpu_get_percentage();
 $GLOBALS['JAVASCRIPT']['common'] = 'common';                                                        
 $GLOBALS['JAVASCRIPT']['updateCPU'] = 'updateCPU';                                                  
 require_once(FUNCTIONS.'graph.php');                                                                
-$content .= view('pages/cpu_status', $page);                                                        
+$content .= view('pages/smartthings', $page);                                                        
 
 // Check for missing information                                                                    
 if($page['temperature'] === FALSE || $page['speed'] === FALSE || $page['voltage'] === FALSE)        
