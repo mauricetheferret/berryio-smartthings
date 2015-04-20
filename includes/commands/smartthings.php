@@ -9,6 +9,7 @@ $title = 'CPU Status';
 
 // Load the cpu functions                                                                           
 require_once(FUNCTIONS.'cpu.php');                                                                  
+require_once(FUNCTIONS.'disk.php');
 
 // Load the system settings                                                                         
 settings('system', 1);                                                                              
