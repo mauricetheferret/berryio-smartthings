@@ -76,14 +76,14 @@ function disk_list()
   return $partitions;
 }
 
-function Disk_get_percent()
+function disk_get_percent()
 {
   /* get disk space free (in bytes) */
-  $df = disk_free_space("/");
+  //$df = disk_free_space("/");
   /* and get disk space total (in bytes)  */
   $dt = disk_total_space("/");
   /* now we calculate the disk space used (in bytes) */
-  $du = $dt - $df;
+  //$du = $dt - $df;
   /* percentage of disk used - this will be used to also set the width % of the progress bar */
   //$dp = sprintf('%.2f',($du / $dt) * 100);
   return $dt;
