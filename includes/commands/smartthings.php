@@ -20,7 +20,7 @@ $page['speed'] = cpu_get_speed();
 $page['voltage'] = cpu_get_volts();                                                                 
 $page['load_average'] = sys_getloadavg();                                                           
 $page['cpu_perc'] = cpu_get_percentage(); 
-//$page['disk_perc'] = disk_get_percentage();
+$page['disk_perc'] = disk_get_percentage();
 
 // Display status page                                                                              
 $GLOBALS['JAVASCRIPT']['common'] = 'common';                                                        
