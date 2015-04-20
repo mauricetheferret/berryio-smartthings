@@ -60,7 +60,7 @@ function cpu_get_percentage()
   return $cpu['user'] + $cpu['nice'] + $cpu['sys'];                                           
 }
 
-function Disk_free_percent()
+function Disk_get_percent()
 {
 
   /* get disk space free (in bytes) */
