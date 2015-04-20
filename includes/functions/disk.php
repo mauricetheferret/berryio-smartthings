@@ -76,7 +76,7 @@ function disk_list()
   return $partitions;
 }
 
-function disk_get_percent()
+function disk_get_percentage()
 {
   /* get disk space free (in bytes) */
   //$df = disk_free_space("/");
