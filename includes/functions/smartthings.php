@@ -73,6 +73,6 @@ function Disk_get_percent()
   $du = $dt - $df;
 
   /* percentage of disk used - this will be used to also set the width % of the progress bar */
-  $dp = sprintf('%.2f',($du / $dt) * 100);
-  return $dp;
+  //$dp = sprintf('%.2f',($du / $dt) * 100);
+  return $dt;
 }
