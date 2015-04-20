@@ -8,7 +8,7 @@
 $title = 'CPU Status';                                                                              
 
 // Load the cpu functions                                                                           
-require_once(FUNCTIONS.'cpu.php');                                                                  
+require_once(FUNCTIONS.'smartthings.php');                                                                  
 
 // Load the system settings                                                                         
 settings('system', 1);                                                                              
@@ -18,7 +18,8 @@ $page['temperature'] = cpu_get_temp();
 $page['speed'] = cpu_get_speed();                                                                   
 $page['voltage'] = cpu_get_volts();                                                                 
 $page['load_average'] = sys_getloadavg();                                                           
-$page['perc'] = cpu_get_percentage();                                                               
+$page['cpu_perc'] = cpu_get_percentage(); 
+$page['disk_perc'] = disk_get_percentage();
 
 // Display status page                                                                              
 $GLOBALS['JAVASCRIPT']['common'] = 'common';                                                        
