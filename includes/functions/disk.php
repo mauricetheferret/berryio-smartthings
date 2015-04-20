@@ -79,12 +79,15 @@ function disk_list()
 function disk_get_percentage()
 {
   /* get disk space free (in bytes) */
-  //$df = disk_free_space("/");
+  $df = disk_free_space("/usr/share/berryio");
+
   /* and get disk space total (in bytes)  */
   $dt = disk_total_space("/usr/share/berryio");
+
   /* now we calculate the disk space used (in bytes) */
-  //$du = $dt - $df;
+  $du = $dt - $df;
+
   /* percentage of disk used - this will be used to also set the width % of the progress bar */
-  //$dp = sprintf('%.2f',($du / $dt) * 100);
-  return $dt;
+  $dp = sprintf('%.2f',($du / $dt) * 100);
+  return $dp;
 }
