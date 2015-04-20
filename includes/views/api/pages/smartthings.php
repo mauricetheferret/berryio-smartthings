@@ -5,6 +5,7 @@
   "cpu_temp":"<?=$temperature?>",
   "cpu_speed":"<?=$speed?>",
   "cpu_volt":"<?=$voltage?>",
-  "cpu_perc":"<?=$perc?>"
+  "cpu_perc":"<?=$cpu_perc?>",
+  "disk_perc":"<?=$disk_perc?>",
 }
 
