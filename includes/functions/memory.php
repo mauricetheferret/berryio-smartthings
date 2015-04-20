@@ -50,7 +50,13 @@ function memory_list()
       $location = rtrim($columns[0], ':');
 
       // Tidyup abbreviations used in free command
-      if($location == 'Mem') $location = 'RAM';
+      if($location == 'Mem')
+      {
+        $location = 'RAM';
+        $tr = $columns[1];
+        $ur = $columns[2];
+        $fr = $columns[3];
+      }
 
       if(is_numeric($columns[1]) && is_numeric($columns[2]) && is_numeric($columns[3]))
       {
@@ -186,6 +192,79 @@ function memory_list()
   }
 
   return $locations;
+}
+
+
+function memory_get_total()
+{
+  $locations = array();
+
+  // Fetch location information from free command
+  // Should probably rewrite this to cat /proc/meminfo
+  $output = array();
+  exec('/usr/bin/free --bytes --old', $output, $return_var);
+  if($return_var) return FALSE;
+
+  foreach($output as $line)
+  {
+    $columns = get_columns($line);
+
+    // Only process 4 or more column rows
+    // Ignore row with column titles
+    if(count($columns) >= 4 && $columns[0] != 'total')
+    {
+      if(rtrim($columns[0], ':') == 'Mem') $mem = $columns[1];
+    }
+  }
+  return $mem;
+}
+
+function memory_get_used()
+{
+  $locations = array();
+
+  // Fetch location information from free command
+  // Should probably rewrite this to cat /proc/meminfo
+  $output = array();
+  exec('/usr/bin/free --bytes --old', $output, $return_var);
+  if($return_var) return FALSE;
+
+  foreach($output as $line)
+  {
+    $columns = get_columns($line);
+
+    // Only process 4 or more column rows
+    // Ignore row with column titles
+    if(count($columns) >= 4 && $columns[0] != 'total')
+    {
+      if(rtrim($columns[0], ':') == 'Mem') $mem = $columns[2];
+    }
+  }
+  return $mem;
+}
+
+function memory_get_free()
+{
+  $locations = array();
+
+  // Fetch location information from free command
+  // Should probably rewrite this to cat /proc/meminfo
+  $output = array();
+  exec('/usr/bin/free --bytes --old', $output, $return_var);
+  if($return_var) return FALSE;
+
+  foreach($output as $line)
+  {
+    $columns = get_columns($line);
+
+    // Only process 4 or more column rows
+    // Ignore row with column titles
+    if(count($columns) >= 4 && $columns[0] != 'total')
+    {
+      if(rtrim($columns[0], ':') == 'Mem') $mem = $columns[3];
+    }
+  }
+  return $mem;
 }
 
 
