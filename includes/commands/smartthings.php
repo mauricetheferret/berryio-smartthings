@@ -22,7 +22,7 @@ $page['voltage'] = cpu_get_volts();
 $page['load_average'] = sys_getloadavg();                                                           
 $page['cpu_perc'] = cpu_get_percentage(); 
 $page['disk_perc'] = disk_get_percentage();
-$page['mem_avail'] = memory_get_free()\1024.0\1024.0;
+$page['mem_avail'] = memory_get_free()/1024.0/1024.0;
 
 // Display status page                                                                              
 $GLOBALS['JAVASCRIPT']['common'] = 'common';                                                        
