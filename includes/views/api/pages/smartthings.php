@@ -7,5 +7,6 @@
   "cpu_volt":"<?=$voltage?>",
   "cpu_perc":"<?=$cpu_perc?>",
   "disk_usage":"<?=$disk_perc?>",
+  "mem_avail":"<?=$mem_avail?>",
 }
 
