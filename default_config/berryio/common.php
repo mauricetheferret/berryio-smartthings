@@ -4,4 +4,4 @@
 ------------------------------------------------------------------------------*/
 
 define('NAME', 'BerryIO');
-date_default_timezone_set('Europe/London');
+date_default_timezone_set('America/Los_Angeles');
