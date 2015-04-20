@@ -6,3 +6,4 @@ www-data ALL=(ALL) NOPASSWD:/usr/share/berryio/scripts/gpio_set_device_permissio
 www-data ALL=(ALL) NOPASSWD:/sbin/ethtool
 www-data ALL=(ALL) NOPASSWD:/sbin/shutdown
 www-data ALL=(ALL) NOPASSWD:/usr/bin/vcgencmd
+www-data ALL=(ALL) NOPASSWD:/proc/stat
