@@ -53,8 +53,8 @@ You should have received a copy of the GNU General Public License along with thi
 
 ###Credits
 
-[NeonHorizon's BerryIO](https://github.com/NeonHorizon/berryio)
-[Ledridges's BerryIO](https://github.com/Ledridge/berryio)
+- [NeonHorizon's BerryIO](https://github.com/NeonHorizon/berryio)
+- [Ledridges's BerryIO](https://github.com/Ledridge/berryio)
 
 SPI module based on code from the Gertboard test suite:
 Copyright (C) Gert Jan van Loo & Myra VanInwegen 2012
