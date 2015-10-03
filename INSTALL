@@ -117,3 +117,10 @@ sudo berryio email_ip
 // If all went well you should now be able to log into your Pi using
 // the web interface and the standard username and password you use
 // at the terminal
+
+// SmartThings
+// Download the device type script 
+https://github.com/nicholaswilde/SmartThingsPublic/blob/master/devicetypes/nicholaswilde/raspberry-pi.src/raspberry-pi.groovy
+// Add the script to SmartThings Device-Type and add a new device using these instructions listed under the
+// Rasberry Pi SmartThings Device Type Installation Instructions section.
+https://github.com/nicholaswilde/smartthings/blob/master/device-types/raspberry-pi/README.md
