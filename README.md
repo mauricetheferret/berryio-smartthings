@@ -6,7 +6,7 @@ BerryIO SmartThings
 - **Description:** BerryIO-SmartThings is a web browser based control system for the RaspberryPi
 - **Project Website:** [GitHub](https://github.com/nicholaswilde/berryio-smartthings)
 - **License:** GPL Version 3
-- **Platform:** Tested on Raspbian Wheezy (2015-05-05) and a Raspberry Pi B.
+- **Platform:** Tested on [Raspbian Wheezy](https://www.raspberrypi.org/downloads/raspbian/) (2015-05-05) and a Raspberry Pi B.
 - **Requirements:** A Raspberry Pi running Raspbian and a web browser (Internet Explorer versions before 8 are not supported) and a SmartThings hub.
 
 ==
