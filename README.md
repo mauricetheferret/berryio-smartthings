@@ -3,8 +3,6 @@
 BerryIO SmartThings
 =======
 
-**Note:** This is a fork of [Ledridges's BerryIO](https://github.com/Ledridge/berryio) that was ported over for SmartThings
-
 - **Description:** BerryIO-SmartThings is a web browser based control system for the RaspberryPi
 - **Project Website:** [GitHub](https://github.com/nicholaswilde/berryio-smartthings)
 - **License:** GPL Version 3
@@ -15,11 +13,9 @@ BerryIO SmartThings
 ![overview](http://frozenmist.co.uk/downloads/berryio/IMAGES/berryio.png)
 
 ###Getting Started
-[Installation Instructions](https://github.com/nicholaswilde/berryio-smartthings/blob/master/INSTALL.README.txt)
+[Installation Instructions](https://github.com/nicholaswilde/berryio-smartthings/blob/master/INSTALL)
 
-[ScreenShots] (https://plus.google.com/u/0/photos/109352235257103413028/albums/5786226385146681521)
-
-[Contributing Code](https://github.com/nicholaswilde/berryio-smartthings/blob/master/CONTRIBUTING_CODE.README.txt)
+[Contributing Code](https://github.com/nicholaswilde/berryio-smartthings/blob/master/CONTRIBUTING_CODE)
 
 ###Project Details
 
@@ -56,6 +52,9 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with this program.  If not, see [http://www.gnu.org/licenses/](http://www.gnu.org/licenses/).
 
 ###Credits
+
+[NeonHorizon's BerryIO](https://github.com/NeonHorizon/berryio)
+[Ledridges's BerryIO](https://github.com/Ledridge/berryio)
 
 SPI module based on code from the Gertboard test suite:
 Copyright (C) Gert Jan van Loo & Myra VanInwegen 2012
