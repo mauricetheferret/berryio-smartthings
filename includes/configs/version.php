@@ -4,7 +4,7 @@
 ------------------------------------------------------------------------------*/
 
 // Check version URL
-define('VERSION_URL', 'https://raw.github.com/Ledridge/berryio/master/VERSION.txt');
+define('VERSION_URL', 'https://raw.githubusercontent.com/nicholaswilde/berryio-smartthings/master/VERSION');
 
 // Version History
 $GLOBALS['VERSION_HISTORY'] = array(
@@ -48,6 +48,7 @@ $GLOBALS['VERSION_HISTORY'] = array(
   array('1.12.1', '2015-01-23', array('Added support for A+ and Compute Module and updated board information')),
   array('1.12.2', '2015-02-07', array('Changes for Raspbian 2015-01-31 compatibility (requires update to be run twice)')),
   array('1.12.3', '2015-04-20', array('Added Smartthings API call')),
+  array('1.12.4', '2015-10-06', array('Added gpio input to SmartThings API call')),
 );
 
 // Version Numbering
