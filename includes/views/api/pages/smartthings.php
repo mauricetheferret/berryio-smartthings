@@ -8,5 +8,5 @@
   "cpu_perc":"<?=$cpu_perc?>",
   "disk_usage":"<?=$disk_perc?>",
   "mem_avail":"<?=$mem_avail?>",
+  "gpio_value_17":"<?=$gpio_values[17]?>"
 }
-
