@@ -1,9 +1,7 @@
-*NOTE: Those having issues with the latest version of Raspbian, please run berryio upgrade twice and this should resolve it*
-
 BerryIO SmartThings
 =======
 
-- **Description:** BerryIO-SmartThings is a web browser based control system for the RaspberryPi
+- **Description:** BerryIO SmartThings is a web browser based control system for the RaspberryPi
 - **Project Website:** [GitHub](https://github.com/nicholaswilde/berryio-smartthings)
 - **License:** GPL Version 3
 - **Platform:** Tested on [Raspbian Wheezy](https://www.raspberrypi.org/downloads/raspbian/) (2015-05-05) and a Raspberry Pi B.
