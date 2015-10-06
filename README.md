@@ -10,7 +10,8 @@ BerryIO SmartThings
 - **Requirements:** A Raspberry Pi running Raspbian and a web browser (Internet Explorer versions before 8 are not supported) and a SmartThings hub.
 
 ==
-![overview](http://frozenmist.co.uk/downloads/berryio/IMAGES/berryio.png)
+![overview](https://raw.githubusercontent.com/nicholaswilde/berryio-smartthings/master/art/screenshot.png)
+![overview](https://raw.githubusercontent.com/nicholaswilde/berryio-smartthings/master/art/screenshot-berryio.png)
 
 ###Getting Started
 [Installation Instructions](https://github.com/nicholaswilde/berryio-smartthings/blob/master/INSTALL)
