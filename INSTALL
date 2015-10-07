@@ -122,5 +122,5 @@ sudo berryio email_ip
 // Download the device type script 
 https://github.com/nicholaswilde/SmartThingsPublic/blob/master/devicetypes/nicholaswilde/raspberry-pi.src/raspberry-pi.groovy
 // Add the script to SmartThings Device-Type and add a new device using these instructions listed under the
-// Rasberry Pi SmartThings Device Type Installation Instructions section.
-https://github.com/nicholaswilde/smartthings/blob/master/device-types/raspberry-pi/README.md
+// Rasberry Pi SmartThings Device Type Installation Instructions.
+https://github.com/nicholaswilde/berryio-smartthings/wiki/Installation
