@@ -12,7 +12,7 @@ BerryIO SmartThings
 ![overview](https://raw.githubusercontent.com/nicholaswilde/berryio-smartthings/master/art/screenshot-berryio.png)
 
 ###Getting Started
-[Installation Instructions](https://github.com/nicholaswilde/berryio-smartthings/blob/master/INSTALL)
+[Installation Instructions](https://github.com/nicholaswilde/berryio-smartthings/wiki/Installation)
 
 [Contributing Code](https://github.com/nicholaswilde/berryio-smartthings/blob/master/CONTRIBUTING_CODE)
 
