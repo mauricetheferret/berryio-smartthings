@@ -52,7 +52,6 @@ $GLOBALS['VERSION_HISTORY'] = array(
   array('1.12.5', '2015-10-10', array('Changes for Pi 2 Model B', 'Changes for new Apache version (requires update to be run twice)')),
   array('1.12.6', '2015-10-10', array('Changes for new PHP version (requires update to be run twice)')),
   array('1.12.7', '2015-11-27', array('Added support for Pi Zero')),
->>>>>>> upstream/master
 );
 
 // Version Numbering
