@@ -10,6 +10,9 @@ fi
 
 echo -e "\nBerryIO Installer\n-----------------"
 
+echo -e "\nUpdating repositories...."
+apt-get update
+
 echo -e "\nInstalling the prerequisites...."
 apt-get -y install ethtool wireless-tools msmtp apache2 php5 libapache2-mod-php5 pwauth git || { echo -e "Install failed!" 1>&2; exit 1; }
 
