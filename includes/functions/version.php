@@ -73,11 +73,38 @@ function version_upgrade()
     return FALSE;
   }
 
-  // Patch the apache site config file for the new GPIO location
-  $patch_file = '/etc/apache2/sites-available/berryio';
+  // Check the system
+  echo 'Checking the system....'.PHP_EOL;
+
+  // Rename the apache config file if required
+  if(file_exists('/etc/apache2/sites-available/berryio'))
+  {
+    rename('/etc/apache2/sites-available/berryio', '/etc/apache2/sites-available/berryio.conf');
+    exec('a2dissite berryio');
+    exec('a2ensite berryio.conf');
+  }
+
+  // Copy in any new files
+  $check_files = array(
+    'php5/apache2/conf.d/berryio.ini',
+    'php5/apache2/conf.d/msmtp.ini',
+    'php5/cli/conf.d/berryio.ini',
+    'php5/cli/conf.d/msmtp.ini',
+  );
+  foreach($check_files as $check_file)
+    if(!file_exists('/etc/'.$check_file) && !copy('/usr/share/berryio/default_config/'.$check_file, '/etc/php5/'.$check_file))
+    {
+      echo 'WARNING:'.PHP_EOL.'The PHP BerryIO config file could not be added, you will need to perform any updates manually.'.PHP_EOL;
+      echo 'An example can be found in /usr/share/berryio/default_config/'.$check_file.PHP_EOL.PHP_EOL;
+    }
+
+  // Patch the apache site config file for the new GPIO location and new options line
+  $patch_file = '/etc/apache2/sites-available/berryio.conf';
   $patch_example = '/usr/share/berryio/default_config/apache2/sites-available/';
-  $patch_before = 'php_admin_value open_basedir "/usr/share/berryio/:/etc/berryio/:/sys/class/gpio/:/sys/devices/virtual/gpio/"';
-  $patch_after = 'php_admin_value open_basedir "/usr/share/berryio/:/etc/berryio/:/sys/class/gpio/:/sys/devices/virtual/gpio/:/sys/devices/"';
+  $patches = array(
+    'php_admin_value open_basedir "/usr/share/berryio/:/etc/berryio/:/sys/class/gpio/:/sys/devices/virtual/gpio/"' => 'php_admin_value open_basedir "/usr/share/berryio/:/etc/berryio/:/sys/class/gpio/:/sys/devices/virtual/gpio/:/sys/devices/"',
+    'Options Indexes None' => 'Options None'
+  );
   if(!file_exists($patch_file))
   {
     echo 'WARNING:'.PHP_EOL.'Your Apache site config file cannot be found, you will need to perform any updates manually.'.PHP_EOL;
@@ -87,22 +114,26 @@ function version_upgrade()
   {
     // Get the file
     $contents = file_get_contents($patch_file);
-    if(strpos($contents, $patch_before) !== FALSE)
+
+    // Apply the patches
+    foreach($patches as $patch_before => $patch_after)
     {
-      echo 'Patching the Apache site config file....'.PHP_EOL;
-      $contents = strtr($contents, array($patch_before => $patch_after));
-      if(file_put_contents($patch_file, $contents) === FALSE)
+      if(strpos($contents, $patch_before) !== FALSE)
       {
-        echo 'WARNING:'.PHP_EOL.'Your Apache site config file could not be patched, you will need to perform the changes manually.'.PHP_EOL;
+        echo 'Patching the Apache site config file....'.PHP_EOL;
+        $contents = strtr($contents, array($patch_before => $patch_after));
+        if(file_put_contents($patch_file, $contents) === FALSE)
+        {
+          echo 'WARNING:'.PHP_EOL.'Your Apache site config file could not be patched, you will need to perform the changes manually.'.PHP_EOL;
+          echo 'An example can be found in '.$patch_example.PHP_EOL.PHP_EOL;
+        }
+      }
+      elseif(strpos($contents, $patch_after) === FALSE)
+      {
+        echo 'WARNING:'.PHP_EOL.'Your Apache site config file is non standard, you will need to perform any updates manually.'.PHP_EOL;
         echo 'An example can be found in '.$patch_example.PHP_EOL.PHP_EOL;
       }
     }
-    elseif(strpos($contents, $patch_after) === FALSE)
-    {
-      echo 'WARNING:'.PHP_EOL.'Your Apache site config file is non standard, you will need to perform any updates manually.'.PHP_EOL;
-      echo 'An example can be found in '.$patch_example.PHP_EOL.PHP_EOL;
-    }
-
   }
 
 

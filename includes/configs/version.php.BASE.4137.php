@@ -4,7 +4,7 @@
 ------------------------------------------------------------------------------*/
 
 // Check version URL
-define('VERSION_URL', 'https://raw.githubusercontent.com/nicholaswilde/berryio-smartthings/master/VERSION');
+define('VERSION_URL', 'https://raw.github.com/NeonHorizon/berryio/master/VERSION.txt');
 
 // Version History
 $GLOBALS['VERSION_HISTORY'] = array(
@@ -47,12 +47,6 @@ $GLOBALS['VERSION_HISTORY'] = array(
   array('1.12.0', '2014-08-02', array('Realtime CPU, Memory and Disk monitoring on the System Status page', 'Improved comments in config files and Hints and Tips', 'Fixes for Disk and Memory API\'s')),
   array('1.12.1', '2015-01-23', array('Added support for A+ and Compute Module and updated board information')),
   array('1.12.2', '2015-02-07', array('Changes for Raspbian 2015-01-31 compatibility (requires update to be run twice)')),
-  array('1.12.3', '2015-04-20', array('Added Smartthings API call')),
-  array('1.12.4', '2015-10-06', array('Added gpio input to SmartThings API call')),
-  array('1.12.5', '2015-10-10', array('Changes for Pi 2 Model B', 'Changes for new Apache version (requires update to be run twice)')),
-  array('1.12.6', '2015-10-10', array('Changes for new PHP version (requires update to be run twice)')),
-  array('1.12.7', '2015-11-27', array('Added support for Pi Zero')),
->>>>>>> upstream/master
 );
 
 // Version Numbering

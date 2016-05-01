@@ -99,8 +99,11 @@ sudo apt-get update
 sudo apt-get upgrade
 
 // Download and run the latest setup script
+<<<<<<< HEAD:INSTALL
 wget -N https://raw.github.com/nicholaswilde/berryio-smartthings/master/scripts/berryio_install.sh
-
+=======
+wget https://github.com/NeonHorizon/berryio/raw/master/scripts/berryio_install.sh
+>>>>>>> upstream/master:INSTALL.README.txt
 chmod +x berryio_install.sh
 sudo ./berryio_install.sh
 

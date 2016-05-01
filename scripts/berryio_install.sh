@@ -22,12 +22,17 @@ git clone https://github.com/nicholaswilde/berryio-smartthings.git /usr/share/be
 echo -e "\nCopying in the default config...."
 cp -R /usr/share/berryio/default_config/berryio /etc || { echo -e "Install failed!" 1>&2; exit 1; }
 cp -R /usr/share/berryio/default_config/apache2 /etc || { echo -e "Install failed!" 1>&2; exit 1; }
-cp -R /usr/share/berryio/default_config/php5 /etc || { echo -e "Install failed!" 1>&2; exit 1; }
+cp /usr/share/berryio/default_config/php5/apache2/conf.d/* /etc/php5/apache2/conf.d || { echo -e "Install failed!" 1>&2; exit 1; }
+cp /usr/share/berryio/default_config/php5/cli/conf.d/* /etc/php5/cli/conf.d || { echo -e "Install failed!" 1>&2; exit 1; }
 cp -R /usr/share/berryio/default_config/network /etc || { echo -e "Install failed!" 1>&2; exit 1; }
 cp -R /usr/share/berryio/default_config/sudoers.d /etc || { echo -e "Install failed!" 1>&2; exit 1; }
 chmod 440 /etc/sudoers.d/berryio || { echo -e "Install failed!" 1>&2; exit 1; }
 if [ ! -f /etc/msmtprc ]; then
   cp /usr/share/berryio/default_config/msmtprc /etc/msmtprc || { echo -e "Install failed!" 1>&2; exit 1; }
+fi
+if [ -f /etc/apache2/sites-available/berryio ]; then
+  a2dissite berryio
+  rm /etc/apache2/sites-available/berryio
 fi
 
 echo -e "\nCreating the log file directories...."
@@ -50,8 +55,13 @@ echo -e "\nEnabling the required Apache modules...."
 a2enmod rewrite authnz_external || { echo -e "Install failed!" 1>&2; exit 1; }
 
 echo -e "\nEnabling the BerryIO site configuration...."
-a2dissite default || { echo -e "Install failed!" 1>&2; exit 1; }
-a2ensite berryio || { echo -e "Install failed!" 1>&2; exit 1; }
+a2dissite default 2> /dev/null
+a2dissite default-ssl 2> /dev/null
+a2dissite 000-default 2> /dev/null
+a2dissite default.conf 2> /dev/null
+a2dissite default-ssl.conf 2> /dev/null
+a2dissite 000-default.conf 2> /dev/null
+a2ensite berryio.conf || { echo -e "Install failed!" 1>&2; exit 1; }
 
 echo -e "\nRestarting Apache...."
 service apache2 restart || { echo -e "Install failed!" 1>&2; exit 1; }
@@ -90,6 +100,9 @@ cat /proc/cpuinfo | grep 'Revision' | grep '0002\|0003' >> /dev/null && GPIOConf
 cat /proc/cpuinfo | grep 'Revision' | grep '0012' >> /dev/null && GPIOConfig='a_plus';
 cat /proc/cpuinfo | grep 'Revision' | grep '0010' >> /dev/null && GPIOConfig='b_plus';
 cat /proc/cpuinfo | grep 'Revision' | grep '0011' >> /dev/null && GPIOConfig='compute_module';
+cat /proc/cpuinfo | grep 'Revision' | grep 'a01041' >> /dev/null && GPIOConfig='2b';
+cat /proc/cpuinfo | grep 'Revision' | grep 'a21041' >> /dev/null && GPIOConfig='2b';
+cat /proc/cpuinfo | grep 'Revision' | grep '900092' >> /dev/null && GPIOConfig='zero';
 echo -e "\nYour Pi has been detected as a $GPIOConfig"
 gpioConfigured="N";
 until [[ "$gpioConfigured" =~ ^[yY]$ || -z "$gpioConfigured" ]]; do
@@ -101,8 +114,8 @@ until [[ "$gpioConfigured" =~ ^[yY]$ || -z "$gpioConfigured" ]]; do
   done
   if [[ "$gpioConfigured" =~ ^[nN]$ ]]; then
     GPIOConfig='';
-    until [[ "$GPIOConfig" = 'rev1.0' ]] || [[ "$GPIOConfig" = 'rev2.0' ]] || [[ "$GPIOConfig" = 'a_plus' ]] || [[ "$GPIOConfig" = 'b_plus' ]] || [[ "$GPIOConfig" = 'compute_module' ]]; do
-      read -p "Please enter your Pi variant [rev1.0|rev2.0|a_plus|b_plus|compute_module]: " GPIOConfig
+    until [[ "$GPIOConfig" = 'rev1.0' ]] || [[ "$GPIOConfig" = 'rev2.0' ]] || [[ "$GPIOConfig" = 'a_plus' ]] || [[ "$GPIOConfig" = 'b_plus' ]] || [[ "$GPIOConfig" = 'compute_module' ]] || [[ "$GPIOConfig" = '2b' ]]; do
+      read -p "Please enter your Pi variant [rev1.0|rev2.0|a_plus|b_plus|2b|compute_module]: " GPIOConfig
     done
     echo
   fi
