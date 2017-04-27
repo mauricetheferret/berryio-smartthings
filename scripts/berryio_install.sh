@@ -14,13 +14,14 @@ echo -e "\nUpdating repositories...."
 apt-get update
 
 echo -e "\nInstalling the prerequisites...."
-apt-get -y install ethtool wireless-tools msmtp apache2 php5 libapache2-mod-php5 pwauth git || { echo -e "Install failed!" 1>&2; exit 1; }
+#apt-get -y install ethtool wireless-tools msmtp apache2 php5 libapache2-mod-php5 pwauth git || { echo -e "Install failed!" 1>&2; exit 1; }
+apt-get -y install ethtool wireless-tools apache2 php5 libapache2-mod-php5 pwauth git || { echo -e "Install failed!" 1>&2; exit 1; }
 
 echo -e "\nRemoving any old copies of BerryIO...."
 rm -fr /usr/share/berryio || { echo -e "Install failed!" 1>&2; exit 1; }
 
 echo -e "\nRetrieving latest copy of BerryIO from GitHub...."
-git clone https://github.com/nicholaswilde/berryio-smartthings.git /usr/share/berryio/
+git clone https://github.com/mauricetheferret/berryio-smartthings.git /usr/share/berryio/
 
 echo -e "\nCopying in the default config...."
 cp -R /usr/share/berryio/default_config/berryio /etc || { echo -e "Install failed!" 1>&2; exit 1; }
@@ -30,9 +31,11 @@ cp /usr/share/berryio/default_config/php5/cli/conf.d/* /etc/php5/cli/conf.d || {
 cp -R /usr/share/berryio/default_config/network /etc || { echo -e "Install failed!" 1>&2; exit 1; }
 cp -R /usr/share/berryio/default_config/sudoers.d /etc || { echo -e "Install failed!" 1>&2; exit 1; }
 chmod 440 /etc/sudoers.d/berryio || { echo -e "Install failed!" 1>&2; exit 1; }
-if [ ! -f /etc/msmtprc ]; then
-  cp /usr/share/berryio/default_config/msmtprc /etc/msmtprc || { echo -e "Install failed!" 1>&2; exit 1; }
-fi
+cp /usr/share/berryio/default_config/init.d/garagerelay.sh /etc/init.d/ || { echo -e "Install failed!" 1>&2; exit 1; }
+chmod 755 /etc/init.d/garagerelay.sh || { echo -e "Install failed!" 1>&2; exit 1; }
+#if [ ! -f /etc/msmtprc ]; then
+#  cp /usr/share/berryio/default_config/msmtprc /etc/msmtprc || { echo -e "Install failed!" 1>&2; exit 1; }
+#fi
 if [ -f /etc/apache2/sites-available/berryio ]; then
   a2dissite berryio
   rm /etc/apache2/sites-available/berryio
@@ -42,13 +45,13 @@ echo -e "\nCreating the log file directories...."
 if [ ! -d /var/log/berryio ]; then
   mkdir /var/log/berryio
 fi
-if [ ! -d /var/log/msmtp ]; then
-  mkdir /var/log/msmtp
-fi
+#if [ ! -d /var/log/msmtp ]; then
+#  mkdir /var/log/msmtp
+#fi
 
-echo -e "\nGranting the webserver access to the email configuration...."
-chmod 640 /etc/msmtprc || { echo -e "Install failed!" 1>&2; exit 1; }
-chgrp www-data /etc/msmtprc || { echo -e "Install failed!" 1>&2; exit 1; }
+#echo -e "\nGranting the webserver access to the email configuration...."
+#chmod 640 /etc/msmtprc || { echo -e "Install failed!" 1>&2; exit 1; }
+#chgrp www-data /etc/msmtprc || { echo -e "Install failed!" 1>&2; exit 1; }
 
 echo -e "\nGranting the webserver access to the GPIO...."
 addgroup gpio &> /dev/null
@@ -73,29 +76,29 @@ echo -e "\nSetting up the BerryIO command line...."
 rm -f /usr/bin/berryio # Just in case any older versions are present
 ln -s /usr/share/berryio/scripts/berryio.php /usr/bin/berryio || { echo -e "Install failed!" 1>&2; exit 1; }
 
-echo -e "\n\nConfiguring email settings\n--------------------------\n"
-defaultMailTo="pi@localhost"
-defaultMailFrom="pi@localhost"
-emailConfigured="N";
-until [[ "$emailConfigured" =~ ^[yY]$ ]]; do
-  read -p "Email address messages should be sent to [$defaultMailTo]: " mailTo
-  read -p "Email address messages should be sent from [$defaultMailFrom]: " mailFrom
-  if [[ -z "$mailTo" ]]; then
-    mailTo="$defaultMailTo"; else
-    defaultMailTo="$mailTo"
-  fi
-  if [[ -z "$mailFrom" ]]; then
-    mailFrom="$defaultMailFrom"; else
-    defaultMailFrom="$mailFrom"
-  fi
-  echo -e "\nMail To:   $mailTo\nMail From: $mailFrom\n"
-  emailConfigured="X"
-  until [[ "$emailConfigured" =~ ^[yYnN]$ || -z "$emailConfigured" ]]; do
-    read -p "Is this correct? [y/N]: " -n1 emailConfigured
-    echo
-  done
-done
-echo -e "<?\n/*------------------------------------------------------------------------------\n  BerryIO Email Settings\n------------------------------------------------------------------------------*/\n\ndefine('EMAIL_FROM', '$mailFrom');\ndefine('EMAIL_TO', '$mailTo');\n" > /etc/berryio/email.php
+#echo -e "\n\nConfiguring email settings\n--------------------------\n"
+#defaultMailTo="pi@localhost"
+#defaultMailFrom="pi@localhost"
+#emailConfigured="N";
+#until [[ "$emailConfigured" =~ ^[yY]$ ]]; do
+#  read -p "Email address messages should be sent to [$defaultMailTo]: " mailTo
+#  read -p "Email address messages should be sent from [$defaultMailFrom]: " mailFrom
+#  if [[ -z "$mailTo" ]]; then
+#    mailTo="$defaultMailTo"; else
+#    defaultMailTo="$mailTo"
+#  fi
+#  if [[ -z "$mailFrom" ]]; then
+#    mailFrom="$defaultMailFrom"; else
+#    defaultMailFrom="$mailFrom"
+#  fi
+#  echo -e "\nMail To:   $mailTo\nMail From: $mailFrom\n"
+#  emailConfigured="X"
+#  until [[ "$emailConfigured" =~ ^[yYnN]$ || -z "$emailConfigured" ]]; do
+#    read -p "Is this correct? [y/N]: " -n1 emailConfigured
+#    echo
+#  done
+#done
+#echo -e "<?\n/*------------------------------------------------------------------------------\n  BerryIO Email Settings\n------------------------------------------------------------------------------*/\n\ndefine('EMAIL_FROM', '$mailFrom');\ndefine('EMAIL_TO', '$mailTo');\n" > /etc/berryio/email.php
 
 echo -e "\n\nConfiguring GPIO settings\n-------------------------"
 GPIOConfig="rev2.0";
